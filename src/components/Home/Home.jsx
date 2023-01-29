@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { links } from '../../data/links'
 import { test } from '../../data/test'
+import Button from '@mui/material/Button';
 import './Home.scss'
 
 const color = [
@@ -17,7 +19,12 @@ function Home() {
   const name = document.getElementsByTagName('input')
   const label = document.getElementsByTagName('label')
 
-  
+  for (let i = 0; i < name.length; i++) {
+    if(name[i].checked){
+      label[i].style.backgroundColor = 'green'
+      console.log('ishladim');
+    }
+  }
 
   return (
     <div>
@@ -30,42 +37,51 @@ function Home() {
         </div>
         <div className="home-numbers">
           <b>Kimyo (3.1)</b>
-          {
-            links?.map((e,i)=>(
-              <a className={active === 1 ? 'spanAct' : ''} key={i} onClick={()=> setId(e.id)} href={e.href}>{e.title}</a>
-            ))
-          }
+          <div className="links">
+            {
+              links?.map((e,i)=>(
+                <a className={active === 1 ? 'spanAct' : ''} key={i} onClick={()=> setId(e.id)} href={e.href}>{e.title}</a>
+              ))
+            }
+          </div>
         </div>
       </div>
       {
         test&&test.map((e, i)=>(
           <section key={i} id={e.id}>
             <div className={e.id === id && id === e.id ? 'bottomScale' : 'bottom'}>
-                  <div className="tests">
-                    <div className="tests-title">
-                      <b>{e.num}</b>
-                      <p>{e.title}</p>
-                    </div>
-                    <div className='tests-variants'>
-                      {
-                        e.variants.map((variant,i)=>(
-                          <label onClick={()=> {
-                            setActive(`${variant.vid}`)
-                            setIds(ids + 1)
-                            !color.includes(variant.vid) ? color.push(variant.vid) : color.push()
-                            // console.log(color);
-                          }} htmlFor={e.id} key={i}>
-                            <b>{variant.variant}</b>
-                            <input type="radio" hidden id={e.id}/>
-                          </label>
-                        ))
-                      }
-                    </div>
-                  </div>
+              <div className="tests">
+                <div className="tests-title">
+                  <b>{e.num}</b>
+                  <p>{e.title}</p>
+                </div>
+                <div className='tests-variants'>
+                  {
+                    e.variants.map((variant,i)=>(
+                      <label onClick={()=> {
+                        setActive(`${variant.vid}`)
+                        setIds(ids + 1)
+                        !color.includes(variant.vid) ? color.push(variant.vid) : color.push()
+                        // console.log(color);
+                      }} htmlFor={e.id} key={i}>
+                        <b>{variant.variant}</b>
+                        <input type="radio" hidden id={e.id}/>
+                      </label>
+                    ))
+                  }
+                </div>
+              </div>
             </div>
           </section>
         ))
       }
+      <div className="home-btn">
+        <Button disabled variant="contained">
+          <Link to='result'>
+            jonatish
+          </Link>
+        </Button>
+      </div>
   </div>
   )
 }
