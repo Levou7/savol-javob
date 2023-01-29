@@ -80,8 +80,14 @@ html{
                 b{
                     cursor: pointer;
                 }
+                &:hover{
+                    cursor: pointer;
+                    width: calc(100% - 20px);
+                    background-color: #0018f433;
+                }
             }
             .labelAct{
+                width: calc(100% - 20px);
                 background-color: #0018f433;
             }
         }
@@ -121,11 +127,18 @@ html{
                 font-size: 24px;
                 font-weight: 300;
                 padding: 10px 15px;
+                width: 100%;
                 b{
                     cursor: pointer;
                 }
+                &:hover{
+                    cursor: pointer;
+                    width: 100%;
+                    background-color: #0018f433;
+                }
             }
             .labelAct{
+                width: 100%;
                 background-color: #0018f433;
             }
         }

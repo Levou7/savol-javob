@@ -3,15 +3,22 @@ import { links } from '../../data/links'
 import { test } from '../../data/test'
 import './Home.scss'
 
+const color = [
+    
+]
 function Home() {
   const [active, setActive] = useState('')
   const [id, setId] = useState('')
+  const [ids, setIds] = useState('')
 
-  test.forEach((e,i)=>{
-    return (
-      console.log(e.id === 1 ? e : 'err')
-    )
+  window.addEventListener('mousedown', e=>{
+    setId(e)
   })
+  const name = document.getElementsByTagName('input')
+  const label = document.getElementsByTagName('label')
+
+  
+
   return (
     <div>
       <div className="home container">
@@ -25,7 +32,7 @@ function Home() {
           <b>Kimyo (3.1)</b>
           {
             links?.map((e,i)=>(
-              <a key={i} onClick={()=> setId(e.id)} href={e.href}>{e.title}</a>
+              <a className={active === 1 ? 'spanAct' : ''} key={i} onClick={()=> setId(e.id)} href={e.href}>{e.title}</a>
             ))
           }
         </div>
@@ -41,10 +48,15 @@ function Home() {
                     </div>
                     <div className='tests-variants'>
                       {
-                        e.variants.map((e,i)=>(
-                          <label htmlFor="radio" key={i}>
-                            <b onClick={()=> setActive(`${e.vid}`)} className={active === String(e.vid) ? 'labelAct' : ''}>{e.variant}</b>
-                            <input type="radio" hidden id='radio'/>
+                        e.variants.map((variant,i)=>(
+                          <label onClick={()=> {
+                            setActive(`${variant.vid}`)
+                            setIds(ids + 1)
+                            !color.includes(variant.vid) ? color.push(variant.vid) : color.push()
+                            // console.log(color);
+                          }} htmlFor={e.id} key={i}>
+                            <b>{variant.variant}</b>
+                            <input type="radio" hidden id={e.id}/>
                           </label>
                         ))
                       }
